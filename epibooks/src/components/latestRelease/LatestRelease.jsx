@@ -1,28 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchBooks } from "../../State/bookActions";
 import SingleCard from "../singleCard/SingleCard";
-import { useSelector } from "react-redux";
 
-const LatestRelease = () => {
-  const books = useSelector((state) => state.books);
 
+
+export default function LatestRelease(){
+  const dispatch = useDispatch();
+  const  {bookArrayRedux}  = useSelector((state) => state.books);
+  console.log(bookArrayRedux);
+
+  useEffect(() => {
+    dispatch(fetchBooks());
+  }, []);
+  
+  
   return (
-    <div className="main-div py-5">
       <Container>
         <Row className="d-flex gap-2">
-          {books.map((book) => (
-            <SingleCard
-              key={book.asin}
-              img={book.img}
-              title={book.title}
-              price={book.price}
-            />
+          {bookArrayRedux && bookArrayRedux.map((book) => (
+            <SingleCard book={book} />
           ))}
         </Row>
       </Container>
-    </div>
   );
 };
 
-export default LatestRelease;
+

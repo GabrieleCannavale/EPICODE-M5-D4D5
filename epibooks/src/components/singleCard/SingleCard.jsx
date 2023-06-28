@@ -3,7 +3,8 @@ import { Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
-const SingleCard = ({ book }) => {
+export default function SingleCard({book}){
+  console.log(book);
   return (
     <Col>
       <Card style={{ width: "18rem" }}>
@@ -18,4 +19,4 @@ const SingleCard = ({ book }) => {
   );
 };
 
-export default SingleCard;
+
