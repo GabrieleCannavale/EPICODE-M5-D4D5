@@ -1,30 +1,75 @@
+import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { filterBooksByTerm } from '../../State/bookReducer';
+import { fetchBooks } from '../../State/bookActions';
 
 function MyNavigationBar() {
+  
+  const dispatch = useDispatch()
+  const  {bookArrayRedux}  = useSelector((state) => state.books);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleInputChange = (e) => {
+
+    const {value} = e.target
+    if (value === "") {
+      dispatch(fetchBooks())
+    }
+    setSearchTerm(value)
+  }
+
+  const filterSearch = (e) => {
+    e.preventDefault();
+     dispatch(filterBooksByTerm(searchTerm))
+  }
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
-      <Container>
-        <Navbar.Brand href="#home">EPIBOOKS</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Link</Nav.Link>
-            <NavDropdown title="Categories" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Horror</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Fantasy
+      <Container fluid>
+        <Navbar.Brand href="#">Epibooks</Navbar.Brand>
+        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Collapse id="navbarScroll">
+          <Nav
+            className="me-auto my-2 my-lg-0"
+            style={{ maxHeight: '100px' }}
+            navbarScroll
+          >
+            <Nav.Link href="#action1">Home</Nav.Link>
+            <Nav.Link href="#action2">Link</Nav.Link>
+            <NavDropdown title="Link" id="navbarScrollingDropdown">
+              <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
+              <NavDropdown.Item href="#action4">
+                Another action
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">SciFi</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                get inspiration!
+              <NavDropdown.Item href="#action5">
+                Something else here
               </NavDropdown.Item>
             </NavDropdown>
+            <Nav.Link href="#" disabled>
+              Link
+            </Nav.Link>
           </Nav>
+          <Form className="d-flex"
+                onSubmit={ filterSearch }
+              >
+            <Form.Control
+              type="search"
+              placeholder="Search"
+              className="me-2"
+              aria-label="Search"
+              onChange={handleInputChange}
+            />
+            <Button 
+            variant="outline-success"
+            type="submit"
+            >Search</Button>
+          </Form>
         </Navbar.Collapse>
       </Container>
     </Navbar>

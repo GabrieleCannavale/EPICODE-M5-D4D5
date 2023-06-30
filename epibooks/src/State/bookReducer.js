@@ -9,13 +9,30 @@ const initialState = {
     bookArrayRedux: [],
     pending: false,
     error: false,
+    randromImage: null,
 }
 
 
 const bookSlice = createSlice({
   name: "books",
   initialState,//Oggetto initialState che contiene gli stati iniziali
-    /* reducers: {}, */  //Non serve perchè non abbiamo bisogno di modificare lo stato, qui vanno inserite tutte le funzione per modificare lo stato dello Slice
+   reducers: {
+    filterBooksByTerm: (state, action) => {
+      state.bookArrayRedux = state.bookArrayRedux.filter((book) => {
+        return book.title.toLowerCase().includes(action.payload.toLowerCase())
+      })      
+    },
+
+    randomCarouselImage: (state) => {
+      const { bookArrayRedux } = state;
+      if (bookArrayRedux.length > 0) {
+        const randomIndex = Math.floor(Math.random() * bookArrayRedux.length);
+        const randomBook = bookArrayRedux[randomIndex];
+        state.randomImage = randomBook.img; // Utilizza la proprietà "img" per l'URL dell'immagine del libro
+      }
+    },
+
+   },
   extraReducers: (builder) => {
     builder
         .addCase(fetchBooks.pending, (state) => {
@@ -32,5 +49,5 @@ const bookSlice = createSlice({
   //ExtraReducers: sono le funzioni che vengono eseguite quando viene chiamata una funzione asincrona
 });
 
-
+export const  { filterBooksByTerm, randomCarouselImage } = bookSlice.actions;
 export default bookSlice.reducer;

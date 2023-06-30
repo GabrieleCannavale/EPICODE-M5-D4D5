@@ -6,11 +6,11 @@ import Card from "react-bootstrap/Card";
 export default function SingleCard({book}){
   console.log(book);
   return (
-    <Col>
-      <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src={book.img} alt={book.title} />
-        <Card.Body>
-          <Card.Title>{book.title}</Card.Title>
+    <Col className="d-flex m-1" >
+      <Card className="border-0" style={{ width: "14rem" }}>
+        <Card.Img variant="top" className="h-50 object-cover" src={book.img} alt={book.title} />
+        <Card.Body className="d-flex flex-column justify-content-between align-items-start">
+          <Card.Title className="font-italic">{book.title}</Card.Title>
           <Card.Text> € {book.price}</Card.Text>
           <Button variant="primary">Go somewhere</Button>
         </Card.Body>
