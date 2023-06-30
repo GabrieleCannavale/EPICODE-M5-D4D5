@@ -9,7 +9,7 @@
     object-fit: cover;
   }
   
-img #carouser-cover {
+img #carousel-cover {
   object-fit: contain !important;
   align-self: flex-start;
 }

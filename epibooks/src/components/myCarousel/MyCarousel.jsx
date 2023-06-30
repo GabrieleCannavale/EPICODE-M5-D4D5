@@ -1,6 +1,7 @@
 import Carousel from "react-bootstrap/Carousel";
 import { useDispatch, useSelector } from "react-redux";
 import { randomCarouselImage } from "../../State/bookReducer";
+import { fetchBooks } from "../../State/bookActions";
 import { useEffect } from "react";
 import './myCarousel.css';
 
@@ -9,11 +10,11 @@ function MyCarousel() {
   const randomImage = useSelector((state) => state.books.randomImage);
 
   useEffect(() => {
-    dispatch(randomCarouselImage());
-  }, [dispatch]);
+    dispatch(fetchBooks()).then(() => randomCarouselImage());
+  }, []);
 
   return (
-    <Carousel className="my-carousel box-shadow my-3 p-4">
+    <Carousel className="my-carousel box-shadow mb-3 py-4">
       <Carousel.Item interval={1000}>
         <Carousel.Item className="d-flex ">
           {randomImage && (
