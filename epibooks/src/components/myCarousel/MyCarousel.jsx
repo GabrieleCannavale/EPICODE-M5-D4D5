@@ -1,7 +1,7 @@
 import Carousel from "react-bootstrap/Carousel";
 import { useDispatch, useSelector } from "react-redux";
-import { randomCarouselImage } from "../../State/bookReducer";
-import { fetchBooks } from "../../State/bookActions";
+import { randomCarouselImage } from "../../bookState/bookReducer";
+import { fetchBooks } from "../../bookState/bookActions";
 import { useEffect } from "react";
 import './myCarousel.css';
 
@@ -18,7 +18,7 @@ function MyCarousel() {
       <Carousel.Item interval={1000}>
         <Carousel.Item className="d-flex ">
           {randomImage && (
-            <img className="p-4" id="carousel-cover" src={randomImage} alt="First slide" />
+            <img className="d-block py-4" id="carousel-cover " src={randomImage} alt="First slide" />
           )}
           <Carousel.Item className="d-flex flex-column justify-content-center align-items-start">
             <h3>First slide label</h3>
@@ -29,7 +29,7 @@ function MyCarousel() {
       </Carousel.Item>
       <Carousel.Item interval={500}>
         <img
-          className="d-block w-100 p-4"
+          className="img-fluid d-block w-100"
           src="https://shorturl.at/gnGK4"
           alt="Second slide"
         />

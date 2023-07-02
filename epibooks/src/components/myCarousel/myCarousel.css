@@ -3,11 +3,7 @@
     overflow: hidden;
   }
 
-  .my-carousel img {
-    width: 50%;
-    height: 400px; 
-    object-fit: cover;
-  }
+ 
   
 img #carousel-cover {
   object-fit: contain !important;

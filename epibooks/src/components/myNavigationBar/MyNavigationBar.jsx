@@ -6,8 +6,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { filterBooksByTerm } from '../../State/bookReducer';
-import { fetchBooks } from '../../State/bookActions';
+import { filterBooksByTerm } from '../../bookState/bookReducer';
+import { fetchBooks } from '../../bookState/bookActions';
 
 function MyNavigationBar() {
   
