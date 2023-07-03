@@ -7,7 +7,7 @@ import './myCarousel.css';
 
 function MyCarousel() {
   const dispatch = useDispatch();
-  const randomImage = useSelector((state) => state.books.randomImage);
+  const randomImage = useSelector((state) => state.books);
 
   useEffect(() => {
     dispatch(fetchBooks()).then(() => randomCarouselImage());

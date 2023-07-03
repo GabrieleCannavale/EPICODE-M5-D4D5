@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
 export default function SingleCard({book}){
-  console.log(book);
+  //console.log(book);
   return (
     <Col className="d-flex m-1" >
       <Card className="border-0" style={{ width: "14rem" }}>

@@ -13,19 +13,19 @@ export default function LatestRelease() {
   const { bookArrayRedux } = useSelector((state) => state.books);
   const { commentArrayRedux } = useSelector((state) => state.comments);
 
-  // console.log(bookArrayRedux);
-  console.log(commentArrayRedux);
+  //console.log(bookArrayRedux);
+  //console.log(commentArrayRedux);
 
-  const [selectedBookComments, setSelectedBookComments] = useState([]);
+  //const [selectedBookComments, setSelectedBookComments] = useState([]);
 
   useEffect(() => {
     dispatch(fetchBooks());
   }, []);
 
-  const handleCardClick = async (asin) => {
-    const comments = await dispatch(fetchCommentsByBookId(asin));
-    setSelectedBookComments(comments);
+  const handleCardClick = (asin) => {
+    dispatch(fetchCommentsByBookId(asin));
   };
+  
 
   return (
     <Row className="d-flex pt-4">
@@ -36,7 +36,9 @@ export default function LatestRelease() {
               <SingleCard
                 key={book.asin}
                 book={book}
-                onClick={() => handleCardClick(book.asin)}
+                onClick={() => {
+                  handleCardClick(book.asin);
+                }}
               />
             ))}
         </Row>
@@ -44,8 +46,8 @@ export default function LatestRelease() {
       <Container className="col-4">
         <h3>Click a card to see relative comments!</h3>
         <Container>
-          {selectedBookComments &&
-            selectedBookComments.map((comment) => (
+          {commentArrayRedux &&
+            commentArrayRedux.map((comment) => (
               <SingleComment key={comment._id} comment={comment} />
             ))}
         </Container>

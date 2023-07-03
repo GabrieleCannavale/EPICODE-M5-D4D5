@@ -5,8 +5,12 @@ export const fetchBooks = createAsyncThunk(
   async () => {
     try {
       const response = await fetch('https://epibooks.onrender.com/');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const data = await response.json();
       return data;
+      console.log(data);
     } catch (error) {
       console.error(error);
     }
