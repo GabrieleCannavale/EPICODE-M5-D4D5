@@ -7,16 +7,14 @@ import SingleCard from "../singleCard/SingleCard";
 import "./latestRelease.css";
 import { fetchCommentsByBookId } from "../../commentState/commentActions";
 import SingleComment from "../singleComment/SingleComment";
+import { nanoid } from "nanoid";
+import { Button } from "react-bootstrap";
 
 export default function LatestRelease() {
   const dispatch = useDispatch();
   const { bookArrayRedux } = useSelector((state) => state.books);
   const { commentArrayRedux } = useSelector((state) => state.comments);
-
-  //console.log(bookArrayRedux);
-  //console.log(commentArrayRedux);
-
-  //const [selectedBookComments, setSelectedBookComments] = useState([]);
+  console.log(commentArrayRedux);
 
   useEffect(() => {
     dispatch(fetchBooks());
@@ -25,7 +23,6 @@ export default function LatestRelease() {
   const handleCardClick = (asin) => {
     dispatch(fetchCommentsByBookId(asin));
   };
-  
 
   return (
     <Row className="d-flex pt-4">
@@ -34,23 +31,26 @@ export default function LatestRelease() {
           {bookArrayRedux &&
             bookArrayRedux.map((book) => (
               <SingleCard
-                key={book.asin}
+                key={nanoid()}
                 book={book}
-                onClick={() => {
-                  handleCardClick(book.asin);
-                }}
+                onClick={() => handleCardClick(book.asin)}
               />
             ))}
         </Row>
       </Container>
       <Container className="col-4">
-        <h3>Click a card to see relative comments!</h3>
-        <Container>
-          {commentArrayRedux &&
-            commentArrayRedux.map((comment) => (
-              <SingleComment key={comment._id} comment={comment} />
-            ))}
-        </Container>
+      {commentArrayRedux.length === 0 ? (
+          <h3>Click a card to see relative comments!</h3>
+        ) : (
+          <>
+            <h3>Comments about:</h3>
+            <Button className="btn btn-success">Add Comment</Button>
+          </>
+        )}
+        {commentArrayRedux &&
+          commentArrayRedux.map((comment) => (
+            <SingleComment key={comment._id} comment={comment} />
+          ))}
       </Container>
     </Row>
   );

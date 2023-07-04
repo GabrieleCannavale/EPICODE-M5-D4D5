@@ -10,4 +10,4 @@ export const fetchCommentsByBookId = createAsyncThunk(
 
         const data = await response.json();
         return data;
-    })
+    });
