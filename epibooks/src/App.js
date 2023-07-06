@@ -1,15 +1,27 @@
 import './App.css';
-import LatestRelease from './components/latestRelease/LatestRelease';
-import MyCarousel from './components/myCarousel/MyCarousel';
-import MyNavigationBar from './components/myNavigationBar/MyNavigationBar';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Homepage from './pages/Homepage';
+import BookDetails from './pages/BookDetail';
+
+
 
 function App() {
   return (
-    <div>
-      <MyNavigationBar />
-      <MyCarousel />
-      <LatestRelease />
-    </div>
+    <Router>
+      <Routes>
+         <Route 
+          exact path="/"
+          element = {<Homepage/>}
+         />
+         <Route 
+          path="/book/:bookAsin"
+          element = {<BookDetails/>}
+         />
+      </Routes>
+
+    </Router>
+
+
   );
 }
 

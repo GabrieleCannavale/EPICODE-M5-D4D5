@@ -8,9 +8,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { filterBooksByTerm } from "../../bookState/bookReducer";
 import { fetchBooks } from "../../bookState/bookActions";
+import { useNavigate } from "react-router-dom";
 
 function MyNavigationBar() {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
+
   const { bookArrayRedux } = useSelector((state) => state.books);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -27,10 +30,14 @@ function MyNavigationBar() {
     dispatch(filterBooksByTerm(searchTerm));
   };
 
+  const handleHomepageByClick = () => {
+    navigate('/');
+  }
+  
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
-        <Navbar.Brand href="#">Epibooks</Navbar.Brand>
+        <Navbar.Brand onClick={handleHomepageByClick} href="#">Epibooks</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
