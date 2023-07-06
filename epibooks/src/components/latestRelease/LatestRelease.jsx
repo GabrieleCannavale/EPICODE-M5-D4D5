@@ -4,11 +4,12 @@ import Row from "react-bootstrap/Row";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBooks } from "../../bookState/bookActions";
 import SingleCard from "../singleCard/SingleCard";
+import AddComment from "../addComment/AddComment";
 import "./latestRelease.css";
 import { fetchCommentsByBookId } from "../../commentState/commentActions";
 import SingleComment from "../singleComment/SingleComment";
 import { nanoid } from "nanoid";
-import { Button } from "react-bootstrap";
+import { setAsin } from "../../commentState/commentReducer";
 
 export default function LatestRelease() {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ export default function LatestRelease() {
   }, []);
 
   const handleCardClick = (asin) => {
+    dispatch(setAsin(asin))
     dispatch(fetchCommentsByBookId(asin));
   };
 
@@ -33,19 +35,19 @@ export default function LatestRelease() {
               <SingleCard
                 key={nanoid()}
                 book={book}
-                onClick={() => handleCardClick(book.asin)}
+                handleCardClick={() => handleCardClick(book.asin)}
               />
             ))}
         </Row>
       </Container>
+
       <Container className="col-4">
-      {commentArrayRedux.length === 0 ? (
+        {commentArrayRedux.length === 0 ? (
           <h3>Click a card to see relative comments!</h3>
         ) : (
-          <>
-            <h3>Comments about:</h3>
-            <Button className="btn btn-success">Add Comment</Button>
-          </>
+          
+            <AddComment/>
+           
         )}
         {commentArrayRedux &&
           commentArrayRedux.map((comment) => (
