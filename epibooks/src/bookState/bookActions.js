@@ -4,7 +4,7 @@ export const fetchBooks = createAsyncThunk(
   'books/fetchBooks',
   async () => {
     try {
-      const response = await fetch('https://epibooks.onrender.com/');
+      const response = await fetch('https://striveschool-api.herokuapp.com/books');
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }

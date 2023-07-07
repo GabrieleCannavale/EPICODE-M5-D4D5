@@ -28,7 +28,7 @@ const sliceDetails = createSlice({
         state.isLoading = false
     })
     .addCase(fetchDetails.rejected, (state) => {
-        state.error = 'errore...'
+        state.error = 'HTTP server error'
         state.isLoading = false
     })
   }
