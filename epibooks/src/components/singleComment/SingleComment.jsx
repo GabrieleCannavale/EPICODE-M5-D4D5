@@ -15,6 +15,7 @@ function SingleComment({comment}) {
     .then(() => dispatch(fetchCommentsByBookId(bookAsin)));
   };
 
+
   return (
     <Card className="text-center">
       

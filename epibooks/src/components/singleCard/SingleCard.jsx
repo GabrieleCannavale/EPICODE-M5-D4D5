@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 export default function SingleCard({ book, handleCardClick }) {
   //console.log(book);
   return (
-    <Col className="d-flex mx-1 my-5">
+    <Col className="d-flex mx-1 my-5 main">
       <Card
         onClick={handleCardClick}
         className="border-0"

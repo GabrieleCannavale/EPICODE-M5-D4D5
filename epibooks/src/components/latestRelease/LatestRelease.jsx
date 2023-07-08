@@ -15,13 +15,14 @@ export default function LatestRelease() {
   const dispatch = useDispatch();
   const { bookArrayRedux } = useSelector((state) => state.books);
   const { commentArrayRedux } = useSelector((state) => state.comments);
-  console.log(commentArrayRedux);
+  const [cardClicked, setCardClicked] = useState(false); // Aggiungi questo stato
 
   useEffect(() => {
     dispatch(fetchBooks());
   }, []);
 
   const handleCardClick = (asin) => {
+    setCardClicked(true); // Imposta cardClicked a true quando una card viene cliccata
     dispatch(setAsin(asin))
     dispatch(fetchCommentsByBookId(asin));
   };
@@ -42,13 +43,7 @@ export default function LatestRelease() {
       </Container>
 
       <Container className="col-4">
-        {commentArrayRedux.length === 0 ? (
-          <h3>Click a card to see relative comments!</h3>
-        ) : (
-          
-            <AddComment/>
-           
-        )}
+        {cardClicked && <AddComment/>} {/* Mostra AddComment solo se una card è stata cliccata */}
         {commentArrayRedux &&
           commentArrayRedux.map((comment) => (
             <SingleComment key={comment._id} comment={comment} />
@@ -57,3 +52,4 @@ export default function LatestRelease() {
     </Row>
   );
 }
+

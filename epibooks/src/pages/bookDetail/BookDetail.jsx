@@ -21,39 +21,38 @@ function BookDetails() {
     <>
       <MyNavigationBar />
 
-      <section class="py-5">
-        <div class="container px-4 px-lg-5 my-5">
-          <div class="row gx-4 gx-lg-5 align-items-center">
-            <div class="col-md-6">
+    <section className="py-5" >
+        <div className="container px-4 px-lg-5 my-5">
+          <div className="row gx-4 gx-lg-5 align-items-center">
+            <div className="col-md-6">
               <img
-                id="product-image"
-                class="card-img-top mb-5 mb-md-0"
+                className="card-img-top mb-5 mb-md-0"
                 src={book.img}
                 alt="product image"
               />
             </div>
-            <div class="col-md-6">
-              <h1 id="product-name" class="display-5 fw-bolder">
+            <div className="col-md-6">
+              <h1 class="display-5 fw-bolder">
                 {book.title}
               </h1>
-              <div class="fs-5 mb-5">
-                <span id="product-price">Price: {book.price}€</span>
+              <div className="fs-5 mb-5">
+                <span>Price: {book.price}€</span>
               </div>
-              <div class="fs-5 mb-5">
-                <em id="product-price">Category: {book.category}</em>
+              <div className="fs-5 mb-5">
+                <em>Category: {book.category}</em>
               </div>
-              <p id="product-descr" class="lead">
+              <p className="lead">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Praesentium at dolorem quidem modi. Nam sequi consequatur
                 obcaecati excepturi alias magni, accusamus eius blanditiis
                 delectus ipsam minima ea iste laborum vero?
               </p>
-              <div class="d-flex">
+              <div className="d-flex">
                 <button
-                  class="btn btn-outline-danger flex-shrink-0"
+                  className="btn btn-outline-danger flex-shrink-0"
                   type="button"
                 >
-                  <i class="bi bi-bag-plus-fill"></i>
+                  <i className="bi bi-bag-plus-fill"></i>
                   Add to Cart
                 </button>
               </div>
