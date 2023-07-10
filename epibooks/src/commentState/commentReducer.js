@@ -1,12 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCommentsByBookId, deleteCommentById } from "./commentActions";
+import {
+  fetchCommentsByBookId,
+  deleteCommentById,
+  putCommentById,
+} from "./commentActions";
 
 const initialState = {
   commentArrayRedux: [],
   pending: false,
   error: null,
   selectedAsin: "",
-
 };
 
 const commentSlice = createSlice({
@@ -14,10 +17,9 @@ const commentSlice = createSlice({
   initialState,
   reducers: {
     setAsin(state, action) {
-      state.selectedAsin = action.payload
+      state.selectedAsin = action.payload;
       //console.log(state.selectedAsin)
     },
-    
   },
   extraReducers: (builder) => {
     builder
@@ -34,7 +36,12 @@ const commentSlice = createSlice({
       .addCase(deleteCommentById.fulfilled, (state, action) => {
         state.commentArrayRedux = state.commentArrayRedux.filter(
           (comment) => comment._id !== action.payload
-        )})
+        );
+      })
+
+      /* .addCase(putCommentById.fulfilled, (state, action) => {
+        const index = state.commentArrayRedux
+      }); */
   },
 });
 

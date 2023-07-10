@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
+import {Row, Col, Container} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBooks } from "../../bookState/bookActions";
 import SingleCard from "../singleCard/SingleCard";
@@ -16,6 +15,7 @@ export default function LatestRelease() {
   const { bookArrayRedux } = useSelector((state) => state.books);
   const { commentArrayRedux } = useSelector((state) => state.comments);
   const [cardClicked, setCardClicked] = useState(false); // Aggiungi questo stato
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     dispatch(fetchBooks());
@@ -23,14 +23,15 @@ export default function LatestRelease() {
 
   const handleCardClick = (asin) => {
     setCardClicked(true); // Imposta cardClicked a true quando una card viene cliccata
-    dispatch(setAsin(asin))
+    dispatch(setAsin(asin));
     dispatch(fetchCommentsByBookId(asin));
   };
 
   return (
-    <Row className="d-flex pt-4">
-      <Container className="col-8">
-        <Row className="d-flex gap-2">
+    
+    <Container fluid>
+      <Row key={nanoid()}>
+        <Col key={nanoid()} xs={12} sm={8} className="books-container d-flex gap-2 flex-wrap">
           {bookArrayRedux &&
             bookArrayRedux.map((book) => (
               <SingleCard
@@ -39,17 +40,19 @@ export default function LatestRelease() {
                 handleCardClick={() => handleCardClick(book.asin)}
               />
             ))}
-        </Row>
-      </Container>
-
-      <Container className="col-4">
-        {cardClicked && <AddComment/>} {/* Mostra AddComment solo se una card è stata cliccata */}
+        </Col>
+        <Col key={nanoid()} xs={12} sm={4} className="comment-container mx-auto"> 
+        {cardClicked && <AddComment />}{" "}
         {commentArrayRedux &&
           commentArrayRedux.map((comment) => (
-            <SingleComment key={comment._id} comment={comment} />
+            <SingleComment
+              key={comment._id}
+              comment={comment}
+              handleShowModal={setShowModal}
+             />
           ))}
-      </Container>
-    </Row>
+        </Col>
+      </Row>
+    </Container>
   );
 }
-

@@ -34,17 +34,21 @@ const AddComment = () => {
       <h3>Comments about:</h3>
       <Form onSubmit={handleSubmit}>
         <Form.Control
-          type="input"
+          as="textarea"
+          cols= "100"
+          rows= "4"
           placeholder="Type comment"
           className="me-2 col"
           aria-label="input"
           value={comment}
           onChange={(e) => setComment(e.target.value)}
         />
-        <Form.Control
+        <div className="d-flex gap-2 align-items-center mt-1 mb-4">
+          <Form.Control
           as="select"
           value={rate}
           onChange={(e) => setRate(e.target.value)}
+          style={{maxWidth:'40px'}}
         >
           <option value={1}>1</option>
           <option value={2}>2</option>
@@ -52,9 +56,10 @@ const AddComment = () => {
           <option value={4}>4</option>
           <option value={5}>5</option>
         </Form.Control>
-        <Button variant="outline-success" type="submit">
+        <Button variant="outline-success" type="submit" className="me-5">
           Add Comment
-        </Button>
+        </Button></div>
+        
       </Form>
     </>
   );

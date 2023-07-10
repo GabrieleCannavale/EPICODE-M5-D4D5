@@ -1,3 +1,15 @@
-.color {
-	background-color: #141215;
+.comment-container {
+	position: -webkit-sticky !important;
+	position:sticky !important;
+	height: 90vh;
+	overflow-y: auto;
+}
+
+.books-container {
+	height: calc(100vh - 10px);
+	overflow-y: auto;
+}
+
+.comment-container::-webkit-scrollbar {
+	display:none;
 }

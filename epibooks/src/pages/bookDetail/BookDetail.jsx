@@ -32,7 +32,7 @@ function BookDetails() {
               />
             </div>
             <div className="col-md-6">
-              <h1 class="display-5 fw-bolder">
+              <h1 className="display-5 fw-bolder">
                 {book.title}
               </h1>
               <div className="fs-5 mb-5">
